@@ -53,7 +53,7 @@
 ### Minor GC与Full GC
 
 - 当Eden区空间不足以继续分配对象时，发起Minor GC；
-- 老年代空间不足或方法区空间不足时，发起Minor GC；
+- 老年代空间不足或方法区空间不足时，发起Full GC；
 
 ### 垃圾收集器
 
@@ -156,5 +156,12 @@ volatile保证了变量的有序性和可见性：
 
 ## JVM调优
 
-没调过
+### 常用配置和命令
+
+- jvm启动参数配置-XX:+HeapDumpOnOutOfMemoryError，可以在OOM时生成堆转储快照；
+- jps命令查看进程id和启动参数；
+- jstat -gc命令查看垃圾回收次数、频率，各个垃圾分代区域的使用占比等；
+- jinfo -flags查看虚拟机参数；
+- jmap -dump生成堆转储快照，jmap -histo显示堆中对象统计信息（包括类、实例数量、合计容量）；
+- jstack生成虚拟机当前时刻的线程快照，一般用于定位线程长时间停顿的原因，如线程间死锁、死循环、请求外部资源导致的长时间挂起等。也可以直接使用Thread.getAllStackTraces()方法；
 
